@@ -1,0 +1,48 @@
+#Implementing a graph in python and performing a BFS search on the graph to find the shortest path.
+
+class Node(object):
+	def __init__(self, node):
+		self.name = node
+		self.neighbors = []
+
+	def addneighbors(self, neighborss):
+		for neighbor in neighborss:
+			if isinstance(neighbor,Node):
+				if neighbor.name not in self.neighbors:
+					self.neighbors.append(neighbor.name)
+					neighbor.neighbors.append(self.name)
+					neighbor.neighbors.sort()
+			else:
+				return False
+
+class Graph(object):
+	def __init__(self):
+		self.nodes ={}
+
+	def addnodes(self,node):
+		for node in nodess:
+			if isinstance(node, Node):
+				self.nodes[node.name] = node.neighbors
+
+	def showgraph(self):
+		return self.nodes
+
+#Set up nodes
+a = Node('A')
+b = Node('B')
+c = Node('C') 
+d = Node('D')
+e = Node('E')
+f = Node('F')
+#Set up connections
+a.addneighbors([c,b])
+b.addneighbors([a,d,e])
+c.addneighbors([a,f])
+d.addneighbors([b])
+e.addneighbors([b,f])
+f.addneighbors([c,e])
+#create graph
+g=Graph()
+g.addnodes([a,b,c,d,e,f])
+
+print g.showgraph()
